@@ -1,9 +1,4 @@
-/**
- * studentManagement.js
- * Bài tập: Quản lý sinh viên (ES6 Module)
- * Có thể import trực tiếp vào dự án React (Create React App):
- *   import { Person, Student, createScores, evaluateStudent } from './studentManagement';
- */
+
 
 /* =========================================================
  * 1. Class Person
@@ -23,10 +18,6 @@ export class Person {
 
 /* =========================================================
  * 2. Class Student kế thừa (extends) Person
- *    - Thuộc tính bổ sung: scores (mảng điểm số)
- *    - Phương thức:
- *        + getAverageScore(): tính điểm trung bình
- *        + displayInfo(): hiển thị đầy đủ thông tin sinh viên
  * ========================================================= */
 export class Student extends Person {
   constructor(name, age, scores = []) {
@@ -50,9 +41,6 @@ export class Student extends Person {
 
 /* =========================================================
  * 3. Sử dụng Rest Parameter
- *    - Hàm createScores(...scores) nhận vào nhiều tham số điểm
- *      và trả về dưới dạng một mảng.
- *    - Ví dụ: createScores(8, 9, 10) => [8, 9, 10]
  * ========================================================= */
 export function createScores(...scores) {
   return scores;
@@ -60,7 +48,6 @@ export function createScores(...scores) {
 
 /* =========================================================
  * 4. Sử dụng Destructuring
- *    - Trích xuất name và age từ một đối tượng student.
  * ========================================================= */
 export function getNameAndAge(student) {
   const { name, age } = student; // destructuring object
@@ -69,7 +56,6 @@ export function getNameAndAge(student) {
 
 /* =========================================================
  * 5. Sử dụng Spread Operator
- *    - Gộp (merge) danh sách điểm mới vào danh sách điểm hiện có.
  * ========================================================= */
 export function mergeScores(oldScores, newScores) {
   return [...oldScores, ...newScores]; // spread operator để gộp 2 mảng
@@ -77,27 +63,23 @@ export function mergeScores(oldScores, newScores) {
 
 /* =========================================================
  * 6. Sử dụng các Array Methods: filter, map, reduce
- *    - filter(): lọc ra các điểm đạt (>= 5)
- *    - map(): xử lý/định dạng dữ liệu điểm
- *    - reduce(): tính tổng hoặc điểm trung bình
  * ========================================================= */
 
-// Lọc các điểm đạt (điểm >= 5)
+
 export function filterPassingScores(scores) {
   return scores.filter((score) => score >= 5);
 }
 
-// Định dạng lại danh sách điểm, ví dụ thêm ký hiệu "điểm"
+/
 export function formatScores(scores) {
   return scores.map((score) => `Điểm: ${score}`);
 }
 
-// Tính tổng điểm bằng reduce
 export function getTotalScore(scores) {
   return scores.reduce((total, score) => total + score, 0);
 }
 
-// Tính điểm trung bình bằng reduce
+
 export function getAverageScoreFromArray(scores) {
   if (scores.length === 0) return 0;
   const total = getTotalScore(scores);
@@ -106,9 +88,6 @@ export function getAverageScoreFromArray(scores) {
 
 /* =========================================================
  * 7. Sử dụng Promise
- *    - Mô phỏng đánh giá kết quả học tập bất đồng bộ (bất đồng bộ giả lập).
- *    - Nếu điểm trung bình >= 8 -> "Học sinh xuất sắc" (Excellent Student)
- *    - Ngược lại -> "Cần cải thiện" (Need Improvement)
  * ========================================================= */
 export function evaluateStudent(student) {
   return new Promise((resolve, reject) => {
@@ -130,10 +109,7 @@ export function evaluateStudent(student) {
   });
 }
 
-/* =========================================================
- * DEMO EXECUTION
- * Chạy thử toàn bộ chức năng trên và in kết quả ra Console.
- * ========================================================= */
+
 function runDemo() {
   console.log('===== 1. Person Class =====');
   const person = new Person('Nguyễn Văn A', 20);
@@ -178,12 +154,11 @@ function runDemo() {
       console.error('Lỗi khi đánh giá:', error);
     });
 
-  // Ví dụ thêm với sinh viên có điểm trung bình thấp hơn
+
   const student2 = new Student('Lê Văn C', 21, [5, 6, 4, 7]);
   evaluateStudent(student2).then((result) => {
     console.log('Kết quả đánh giá (sinh viên 2):', result);
   });
 }
 
-// Gọi hàm demo để hiển thị toàn bộ kết quả ra Console
 runDemo();
